@@ -1,12 +1,11 @@
-import React, {useEffect} from 'react';
+import * as React from 'react';
 import {Button, Input, InputNumber, Typography} from "antd";
 import {Box} from "grommet";
 import {sendFormStore} from "./SendFormStore";
-import {parseEther, isAddress} from "viem";
 import {useSendTransaction} from "wagmi";
 import {observer} from "mobx-react";
 import {BaseLayout} from "../../components/BaseLayout";
-import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 export const WCSendForm: React.FC = observer(() => {
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ export const WCSendForm: React.FC = observer(() => {
   const amount = qrParams.get('amount');
   const address = qrParams.get('to');
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (amount && address) {
       sendFormStore.amount = amount;
       sendFormStore.address = address;
@@ -24,7 +23,7 @@ export const WCSendForm: React.FC = observer(() => {
   }, [amount, address]);
 
 
-  const { isLoading, sendTransaction, isSuccess, isIdle, isError, error, reset, data } = useSendTransaction({
+  const { isLoading, sendTransaction, isSuccess, isError, error, reset, data } = useSendTransaction({
     to: sendFormStore.address,
     value: sendFormStore.getEthAmount(),
   });
@@ -75,12 +74,6 @@ export const WCSendForm: React.FC = observer(() => {
             Back
           </Button>}
         </Box>
-        {isSuccess &&
-          <Box margin={{top: '16px'}} gap="16px">
-            <Typography.Text type="success">Success</Typography.Text>
-            <Typography.Text>{data?.hash}</Typography.Text>
-          </Box>
-        }
         {isSuccess &&
           <Box margin={{top: '16px'}} gap="16px">
             <Typography.Text type="success">Success</Typography.Text>
