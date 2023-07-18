@@ -21,5 +21,5 @@ export function WCAccount() {
   if (isConnected && address) {
     return <BaseLayout><Account address={address} /></BaseLayout>
   }
-  return <BaseLayout><Button type={'primary'} onClick={handleConnect}>Connect Wallet</Button></BaseLayout>
+  return <BaseLayout><Button type={'primary'} block onClick={handleConnect}>Connect Wallet</Button></BaseLayout>
 }

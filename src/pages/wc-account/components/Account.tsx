@@ -26,7 +26,7 @@ export const Account: React.FunctionComponent<Props> = ({ address }) => {
   }
 
   return (
-    <Box gap={'16px'}>
+    <Box gap={'16px'} fill="horizontal">
       <Box>
         <Typography.Text>Balance: {data?.formatted} {data?.symbol}</Typography.Text>
       </Box>
@@ -34,9 +34,9 @@ export const Account: React.FunctionComponent<Props> = ({ address }) => {
         <Typography.Text>Address: {address}</Typography.Text>
       </Box>
       <Box>
-        <Button type={'primary'} onClick={goToSendForm}>Send ONE</Button>
+        <Button type="primary" onClick={goToSendForm}>Send ONE</Button>
       </Box>
-      <Button type="default" onClick={handleDisconnect}>Disconnect</Button>
+      <Button type="default" danger block onClick={handleDisconnect}>Disconnect</Button>
     </Box>
   )
 };
