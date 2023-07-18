@@ -2,7 +2,8 @@ import {makeAutoObservable, runInAction} from "mobx"
 import {generateTOTP, getAccountPassword} from "../utils/account";
 import * as storage from '../utils/storage'
 import Web3 from "web3";
-import { Account } from "web3-core";
+import {Web3Account} from "web3-eth-accounts"
+
 import config from "../config";
 
 export class AuthStore {
@@ -10,7 +11,7 @@ export class AuthStore {
   secret: string = ''
   userId: string = ''
   currentTotp = ''
-  userAccount: Account | undefined
+  userAccount: Web3Account | undefined
   userBalance = '0'
   isAccountLoaded: boolean = false
 
@@ -99,7 +100,7 @@ export class AuthStore {
     return this.currentTotp === storage.getTotpToken()
   }
 
-  public async createUserAccount(account: Account, password: string) {
+  public async createUserAccount(account: Web3Account, password: string) {
     const web3 = new Web3()
     const encrypted = await web3.eth.accounts.encrypt(account.privateKey, password)
     storage.saveEncryptedAccount(JSON.stringify(encrypted))

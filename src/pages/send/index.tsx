@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import {Box} from "grommet";
 import {useNavigate} from "react-router-dom";
 import {Button, Input, InputNumber, Typography, Divider, Breadcrumb} from "antd";
 import {AccountInfo} from "../../components/Account";
-import Web3 from "web3";
+import Web3, {TransactionReceipt} from "web3";
 import bn from 'bignumber.js'
-import { TransactionReceipt } from "web3-core";
 import config from "../../config";
 import {observer} from "mobx-react";
 import {useStores} from "../../stores/useStores";
@@ -45,8 +44,8 @@ const SendOne = observer(() => {
         if(authStore.userAccount) {
           const web3 = new Web3(config.rpcUrl)
           const gasPrice = await web3.eth.getGasPrice();
-          const gasLimit = '21000'
-          setGasPrice((+gasPrice * +gasLimit).toString())
+          const gasLimit = BigInt('21000');
+          setGasPrice((gasPrice * gasLimit).toString())
         }
       } catch (e) {
         console.log('Cannot estimate gas price', e)

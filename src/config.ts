@@ -1,7 +1,7 @@
 const config = {
   rpcUrl: 'https://api.harmony.one',
   walletConnect: {
-    projectId: '',
+    projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
   },
   chainParameters: {
       id: 1666600000, // '0x63564C40'

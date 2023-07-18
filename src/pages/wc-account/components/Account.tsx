@@ -1,15 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import {useBalance, useDisconnect} from "wagmi";
-import {Button} from "antd";
+import {Button, Typography} from "antd";
 import {Box} from "grommet";
 import {useNavigate} from "react-router-dom";
 
 interface Props {
-  address: string
+  address: `0x${string}`
 }
 
-export const Account: React.FC<Props> = ({ address }) => {
-  const { data, isError, isLoading } = useBalance({ address: address, watch: true, });
+export const Account: React.FunctionComponent<Props> = ({ address }) => {
+  const { data, isError, isLoading } = useBalance({ address, watch: true });
   const { disconnect } = useDisconnect()
 
   const navigate = useNavigate();
@@ -28,10 +28,10 @@ export const Account: React.FC<Props> = ({ address }) => {
   return (
     <Box gap={'16px'}>
       <Box>
-        Balance: {data?.formatted} {data?.symbol}
+        <Typography.Text>Balance: {data?.formatted} {data?.symbol}</Typography.Text>
       </Box>
       <Box>
-        Address: {address}
+        <Typography.Text>Address: {address}</Typography.Text>
       </Box>
       <Box>
         <Button type={'primary'} onClick={goToSendForm}>Send ONE</Button>

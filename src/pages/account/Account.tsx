@@ -1,4 +1,3 @@
-import React from 'react'
 import {Box} from "grommet";
 import {Button, Divider} from "antd";
 import * as storage from "../../utils/storage";

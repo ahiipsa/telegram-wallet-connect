@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import {Box} from "grommet";
 import {Button, Typography, Image, Checkbox} from "antd";
 import { toDataURL } from 'qrcode'

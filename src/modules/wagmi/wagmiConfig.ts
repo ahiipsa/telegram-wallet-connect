@@ -8,6 +8,8 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   [publicProvider()],
 )
 
+console.log('### config.walletConnect.projectId', config.walletConnect.projectId);
+
 export const walletConnectConnector = new WalletConnectConnector({
   chains: chains,
   options: {

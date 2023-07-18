@@ -27,6 +27,7 @@
     "web3-core": "^4.0.3"
   },
   "devDependencies": {
+    "@types/qrcode": "^1.5.1",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@typescript-eslint/eslint-plugin": "^5.61.0",

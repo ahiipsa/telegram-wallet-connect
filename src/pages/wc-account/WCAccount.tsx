@@ -9,8 +9,17 @@ export function WCAccount() {
   const { address, isConnected } = useAccount()
   const { connect } = useConnect({connector: walletConnectConnector});
 
-  if (isConnected) {
+  const handleConnect = () => {
+
+    try {
+      connect()
+    } catch (ex) {
+      console.log('### ex', ex);
+    }
+  }
+
+  if (isConnected && address) {
     return <BaseLayout><Account address={address} /></BaseLayout>
   }
-  return <BaseLayout><Button type={'primary'} onClick={() => connect()}>Connect Wallet</Button></BaseLayout>
+  return <BaseLayout><Button type={'primary'} onClick={handleConnect}>Connect Wallet</Button></BaseLayout>
 }

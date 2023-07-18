@@ -1,16 +1,19 @@
 import React from 'react';
-import {Button, Input, InputNumber} from "antd";
+import {Button, Input, InputNumber, Typography} from "antd";
 import {Box} from "grommet";
 import {sendFormStore} from "./SendFormStore";
-import {parseEther} from "viem";
+import {parseEther, isAddress} from "viem";
 import {useSendTransaction} from "wagmi";
 import {observer} from "mobx-react";
+import {BaseLayout} from "../../components/BaseLayout";
+import {useNavigate} from "react-router-dom";
 
 export const WCSendForm: React.FC = observer(() => {
+  const navigate = useNavigate();
 
-  const { data, isLoading, isSuccess, isError, isIdle, sendTransaction } = useSendTransaction({
+  const { isLoading, sendTransaction, isSuccess, data } = useSendTransaction({
     to: sendFormStore.address,
-    value: parseEther(sendFormStore.amount),
+    value: sendFormStore.getEthAmount(),
   });
 
   const handleSend = () => {
@@ -19,7 +22,9 @@ export const WCSendForm: React.FC = observer(() => {
     }
   }
 
-  return <Box>
+  console.log('### data', data);
+
+  return <BaseLayout>
     <Box gap={'16px'}>
       <Input
         placeholder={'Address (0x...)'}
@@ -35,14 +40,24 @@ export const WCSendForm: React.FC = observer(() => {
         onChange={(value) => sendFormStore.amount = String(value)}
       />
     </Box>
-    <Box margin={{ top: '16px' }}>
+    <Box margin={{ top: '16px' }} gap="16px">
       <Button
         type={'primary'}
-        disabled={isLoading}
+        disabled={isLoading || !sendFormStore.isValid()}
+        loading={isLoading}
         onClick={handleSend}>
         Confirm
       </Button>
+      <Button onClick={() => navigate('/')}>
+        Back
+      </Button>
     </Box>
-  </Box>;
+    {isSuccess &&
+      <Box margin={{top: '16px'}} gap="16px">
+        <Typography.Text type="success">Success</Typography.Text>
+        <Typography.Text>{data?.hash}</Typography.Text>
+      </Box>
+    }
+  </BaseLayout>;
 });
 
