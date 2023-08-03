@@ -9,6 +9,7 @@ import {useStores} from "./stores/useStores";
 import {WCAccount} from "./pages/wc-account/WCAccount";
 import {WCSendForm} from "./pages/wc-send-form/WCSendForm";
 import {WCConfirmTransaction} from "./pages/wc-confirm-transaction/WCConfirmTransaction";
+import {PoolsPage} from "./pages/pools/PoolsPage";
 
 export const AppRoutes = observer(() => {
   const { authStore } = useStores()
@@ -31,6 +32,7 @@ export const AppRoutes = observer(() => {
     <Route index path={'/'} element={<WCAccount />} />
     <Route index path={'/wc-send-form'} element={<WCSendForm />} />
     <Route index path={'/wc-confirm-transaction'} element={<WCConfirmTransaction />} />
+    <Route index path={'/pools'} element={<PoolsPage />} />
     {/*<Route*/}
     {/*  index*/}
     {/*  path={'/'}*/}

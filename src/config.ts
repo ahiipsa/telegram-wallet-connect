@@ -3,6 +3,7 @@ const config = {
   walletConnect: {
     projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
   },
+  graphqlHost: import.meta.env.VITE_WALLET_GRAPHQL_HOST,
   chainParameters: {
       id: 1666600000, // '0x63564C40'
       name: 'Harmony Mainnet Shard 0',
