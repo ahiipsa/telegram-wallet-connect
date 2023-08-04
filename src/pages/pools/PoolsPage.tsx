@@ -1,6 +1,6 @@
 import {BaseLayout} from "../../components/BaseLayout";
 import {useQuery} from "@apollo/client";
-import {useAccount} from "wagmi";
+import {useAccount, useDisconnect} from "wagmi";
 import {Button, Typography} from "antd";
 import {gql} from "../../__generated__/gql";
 import {useMemo} from "react";
@@ -76,6 +76,8 @@ export function TotalLiquidity({address}: {address: string}) {
 
   const tokensHourDatas = useQuery(GET_TOKEN_HOURS_DATA, {variables: {timestamp}});
 
+  const { disconnect } = useDisconnect()
+
   const priceMap = useMemo(() => {
 
     if (!tokensHourDatas.data) {
@@ -102,6 +104,7 @@ export function TotalLiquidity({address}: {address: string}) {
           <Typography.Text>{address}</Typography.Text>
           <Typography.Text strong>You have no liquidity pools</Typography.Text>
           <Button type="primary" href="https://swap.country/#/pools">Create pool</Button>
+          <Button type="default" danger onClick={() => disconnect()}>Disconnect</Button>
         </Box>
       </BaseLayout>
     );
@@ -145,12 +148,15 @@ export function TotalLiquidity({address}: {address: string}) {
   return (
     <Box gap="16px">
       <Typography.Text strong>
-        Total liquidity: {calculateTotalLiquidityUsd(data.positions)}
+        Total liquidity: ${calculateTotalLiquidityUsd(data.positions)}
       </Typography.Text>
 
       <Typography.Text strong>
-        Total revenue: {calculateTotalRevenueUsd(data.positions)}
+        Total revenue: ${calculateTotalRevenueUsd(data.positions)}
       </Typography.Text>
+
+      <Button type="primary" href="https://swap.country/#/pools">Create pool</Button>
+      <Button type="default" danger onClick={() => disconnect()}>Disconnect</Button>
     </Box>
   );
 }
