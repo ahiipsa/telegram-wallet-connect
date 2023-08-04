@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "query PositionsQuery($address: Bytes!) {\n  positions(where: {owner: $address}) {\n    id,\n      owner,\n      liquidity,\n      depositedToken0,\n      depositedToken1,\n      collectedFeesToken0,\n      collectedFeesToken1,\n      withdrawnToken0,\n      feeGrowthInside0LastX128,\n      feeGrowthInside1LastX128,\n      tickUpper {\n      id\n    },\n    tickLower {\n      liquidityProviderCount\n    },\n    token0 {\n      id,\n        name,\n        symbol,\n    },\n    token1 {\n      id,\n        name\n    }\n  }\n}\n": types.PositionsQueryDocument,
+    "\n    query TokensQuery($timestamp: Int) {\n        tokenHourDatas(where: {periodStartUnix_gt: $timestamp})  {\n            token {\n                id,\n                name,\n            },\n            priceUSD\n        }\n    }\n": types.TokensQueryDocument,
+    "\n    query PositionsQuery($address: Bytes) {\n      positions(where: {owner: $address}) {\n          id,\n          owner,\n          liquidity,\n          depositedToken0,\n          depositedToken1,\n          collectedFeesToken0,\n          collectedFeesToken1,\n          feeGrowthInside0LastX128,\n          feeGrowthInside1LastX128,\n          token0 {\n              id\n          },\n          token1 {\n              id\n          }\n      }\n    }\n": types.PositionsQueryDocument,
 };
 
 /**
@@ -33,7 +34,11 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "query PositionsQuery($address: Bytes!) {\n  positions(where: {owner: $address}) {\n    id,\n      owner,\n      liquidity,\n      depositedToken0,\n      depositedToken1,\n      collectedFeesToken0,\n      collectedFeesToken1,\n      withdrawnToken0,\n      feeGrowthInside0LastX128,\n      feeGrowthInside1LastX128,\n      tickUpper {\n      id\n    },\n    tickLower {\n      liquidityProviderCount\n    },\n    token0 {\n      id,\n        name,\n        symbol,\n    },\n    token1 {\n      id,\n        name\n    }\n  }\n}\n"): (typeof documents)["query PositionsQuery($address: Bytes!) {\n  positions(where: {owner: $address}) {\n    id,\n      owner,\n      liquidity,\n      depositedToken0,\n      depositedToken1,\n      collectedFeesToken0,\n      collectedFeesToken1,\n      withdrawnToken0,\n      feeGrowthInside0LastX128,\n      feeGrowthInside1LastX128,\n      tickUpper {\n      id\n    },\n    tickLower {\n      liquidityProviderCount\n    },\n    token0 {\n      id,\n        name,\n        symbol,\n    },\n    token1 {\n      id,\n        name\n    }\n  }\n}\n"];
+export function gql(source: "\n    query TokensQuery($timestamp: Int) {\n        tokenHourDatas(where: {periodStartUnix_gt: $timestamp})  {\n            token {\n                id,\n                name,\n            },\n            priceUSD\n        }\n    }\n"): (typeof documents)["\n    query TokensQuery($timestamp: Int) {\n        tokenHourDatas(where: {periodStartUnix_gt: $timestamp})  {\n            token {\n                id,\n                name,\n            },\n            priceUSD\n        }\n    }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n    query PositionsQuery($address: Bytes) {\n      positions(where: {owner: $address}) {\n          id,\n          owner,\n          liquidity,\n          depositedToken0,\n          depositedToken1,\n          collectedFeesToken0,\n          collectedFeesToken1,\n          feeGrowthInside0LastX128,\n          feeGrowthInside1LastX128,\n          token0 {\n              id\n          },\n          token1 {\n              id\n          }\n      }\n    }\n"): (typeof documents)["\n    query PositionsQuery($address: Bytes) {\n      positions(where: {owner: $address}) {\n          id,\n          owner,\n          liquidity,\n          depositedToken0,\n          depositedToken1,\n          collectedFeesToken0,\n          collectedFeesToken1,\n          feeGrowthInside0LastX128,\n          feeGrowthInside1LastX128,\n          token0 {\n              id\n          },\n          token1 {\n              id\n          }\n      }\n    }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
