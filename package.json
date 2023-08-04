@@ -7,12 +7,19 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "compile": "graphql-codegen",
+    "watch": "graphql-codegen -w"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.17",
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/client-preset": "^4.1.0",
     "antd": "^5.7.0",
     "axios": "^1.4.0",
     "bignumber.js": "^9.1.1",
+    "ethers": "^6.7.0",
+    "graphql": "^16.7.1",
     "grommet": "^2.33.0",
     "mobx": "^6.9.1",
     "mobx-react": "^9.0.0",
