@@ -4,7 +4,7 @@ import {useConnect} from "wagmi";
 import {walletConnectConnector} from "../modules/wagmi/wagmiConfig";
 import {BaseLayout} from "./BaseLayout";
 
-export const LoginPage: React.FunctionComponent<{children: React.ReactNode}> = () => {
+export const LoginPage: React.FunctionComponent = () => {
   const { connect } = useConnect({connector: walletConnectConnector});
 
   const handleConnect = () => {

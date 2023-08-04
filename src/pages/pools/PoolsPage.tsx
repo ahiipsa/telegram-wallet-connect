@@ -7,8 +7,6 @@ import {useMemo} from "react";
 import {LoginPage} from "../../components/LoginPage";
 import {Box} from "grommet";
 
-/* eslint-disable */
-
 interface Position {
   depositedToken0: string;
   depositedToken1: string;
@@ -70,7 +68,7 @@ export function PoolsPage() {
   );
 }
 
-const timestamp = (Date.now() / 1000).toFixed(0) - (140 * 60);
+const timestamp = Math.round(Date.now() / 1000) - (140 * 60);
 
 export function TotalLiquidity({address}: {address: string}) {
 
@@ -86,7 +84,7 @@ export function TotalLiquidity({address}: {address: string}) {
 
     return tokensHourDatas.data.tokenHourDatas.reduce((acc, item) => {
       return {...acc, [item.token.id]: item.priceUSD};
-    }, {} as {[key: string]: number});
+    }, {} as {[key: string]: string});
   }, [tokensHourDatas]);
 
   if (loading) {
@@ -109,13 +107,13 @@ export function TotalLiquidity({address}: {address: string}) {
     );
   }
 
-  const getUsdPrice = (tokenId: string) => {
+  const getUsdPrice = (tokenId: string): string => {
     return priceMap[tokenId] || '0';
   }
 
   const calcUsdAmount = (tokenId: string, amount: string) => {
     const price = getUsdPrice(tokenId);
-    return price * amount;
+    return Number(price) * Number(amount);
   }
 
   const calculatePositionTotalLiquidityUsd = (position: Position) => {
